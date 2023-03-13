@@ -3,6 +3,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import {
   useFonts,
   Raleway_400Regular,
+  Raleway_500Medium,
   Raleway_700Bold,
 } from '@expo-google-fonts/raleway';
 import * as SplashScreen from 'expo-splash-screen';
@@ -10,17 +11,14 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 import Home from './components/Home';
 import GameGenres from './components/GameGenres';
 
-export default function App() {
-  loadAppFonts();
-
-  return createTabNavigation();
-}
-
 SplashScreen.preventAutoHideAsync();
 
-function loadAppFonts() {
+const Tab = createBottomTabNavigator();
+
+export default function App() {
   const [fontsLoaded] = useFonts({
     Raleway_400Regular,
+    Raleway_500Medium,
     Raleway_700Bold,
   });
 
@@ -29,11 +27,7 @@ function loadAppFonts() {
   } else {
     return null;
   }
-}
 
-const Tab = createBottomTabNavigator();
-
-function createTabNavigation() {
   return (
     <NavigationContainer>
       <Tab.Navigator

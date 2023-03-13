@@ -5,6 +5,8 @@ export default StyleSheet.create({
     padding: 10,
     alignItems: 'center',
     justifyContent: 'center',
+    height: '95%',
+    width: '95%',
   },
   text: {
     fontFamily: 'Raleway_400Regular',
@@ -13,7 +15,7 @@ export default StyleSheet.create({
   buttonText: {
     fontSize: 20,
     textAlign: 'center',
-    fontFamily: 'Raleway_400Regular',
+    fontFamily: 'Raleway_500Medium',
   },
   h1: {
     fontSize: 20,
