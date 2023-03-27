@@ -1,10 +1,14 @@
 import { useEffect, useState } from 'react';
-import { View, Text } from 'react-native';
+import { View, Text, useColorScheme, SafeAreaView } from 'react-native';
 import { FlatList } from 'react-native-gesture-handler';
 import parser from 'react-native-xml2js';
-import styles from './Styles.js';
+
+import styles from './Styles';
 
 export default function GameGenres() {
+  const colorScheme = useColorScheme();
+  const theme = colorScheme === 'light' ? styles.lightTheme : styles.darkTheme;
+
   const [isLoading, setIsLoading] = useState(false);
   const [gameList, setGameList] = useState([]);
 
@@ -13,39 +17,43 @@ export default function GameGenres() {
     fetch('https://api.geekdo.com/xmlapi/search?search=battle%20wizards')
       .then((response) => response.text())
       .then((data) => {
-        parser.parseString(data, (err, result) => {
-          if (err) {
-            console.error(`XML parse error: ${err}`);
+        parser.parseString(data, (error, result) => {
+          if (error) {
+            console.error(`XML parse error: ${error}`);
           } else {
             setGameList(result.boardgames.boardgame);
             setIsLoading(false);
           }
         });
       })
-      .catch((err) => console.error(`API fetch error: ${err}`));
+      .catch((error) => console.error(`API fetch error: ${error}`));
   }, []);
 
   if (isLoading) {
     return (
-      <View style={styles.container}>
-        <Text style={styles.text}>Loading...</Text>
-      </View>
+      <SafeAreaView style={theme.container}>
+        <View style={theme.textContainer}>
+          <Text style={theme.text}>Loading...</Text>
+        </View>
+      </SafeAreaView>
     );
   }
 
   return (
-    <View style={styles.container}>
-      <Text style={styles.h1}>Fantasy</Text>
-      <Text style={styles.h1}>Sci-fi</Text>
-      <FlatList
-        data={gameList}
-        renderItem={({ item }) => (
-          <View>
-            <Text>{item.name[0]._}</Text>
-          </View>
-        )}
-        keyExtractor={(item) => item.$.objectid}
-      />
-    </View>
+    <SafeAreaView style={theme.container}>
+      <View style={theme.textContainer}>
+        <Text style={theme.h1}>Fantasy</Text>
+        <Text style={theme.h1}>Sci-fi</Text>
+        <FlatList
+          data={gameList}
+          renderItem={({ item }) => (
+            <View style={theme.listContainer}>
+              <Text style={theme.text}>{item.name[0]._}</Text>
+            </View>
+          )}
+          keyExtractor={(item, index) => index}
+        />
+      </View>
+    </SafeAreaView>
   );
 }
