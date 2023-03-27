@@ -80,8 +80,16 @@ export default function App() {
             tabBarInactiveBackgroundColor: theme.container.backgroundColor,
           })}
         >
-          <Tab.Screen name="Home" component={Home} />
-          <Tab.Screen name="Genres" component={GameGenres} />
+          <Tab.Screen
+            name="Home"
+            component={Home}
+            initialParams={{ theme: theme }}
+          />
+          <Tab.Screen
+            name="Genres"
+            component={GameGenres}
+            initialParams={{ theme: theme }}
+          />
         </Tab.Navigator>
       </NavigationContainer>
     </SafeAreaView>

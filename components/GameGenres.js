@@ -1,13 +1,12 @@
 import { useEffect, useState } from 'react';
-import { View, Text, useColorScheme, SafeAreaView } from 'react-native';
+import { View, Text, SafeAreaView } from 'react-native';
 import { FlatList } from 'react-native-gesture-handler';
 import parser from 'react-native-xml2js';
 
 import styles from './Styles';
 
-export default function GameGenres() {
-  const colorScheme = useColorScheme();
-  const theme = colorScheme === 'light' ? styles.lightTheme : styles.darkTheme;
+export default function GameGenres(props) {
+  const theme = props.route.params.theme;
 
   const [isLoading, setIsLoading] = useState(false);
   const [gameList, setGameList] = useState([]);

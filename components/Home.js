@@ -1,10 +1,9 @@
-import { Text, SafeAreaView, useColorScheme, View } from 'react-native';
+import { Text, SafeAreaView, View } from 'react-native';
 
 import styles from './Styles';
 
-export default function Home() {
-  const colorScheme = useColorScheme();
-  const theme = colorScheme === 'light' ? styles.lightTheme : styles.darkTheme;
+export default function Home(props) {
+  const theme = props.route.params.theme;
 
   return (
     <SafeAreaView style={theme.container}>
