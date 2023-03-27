@@ -1,9 +1,7 @@
 import { Text, SafeAreaView, View } from 'react-native';
 
-import styles from './Styles';
-
-export default function Home(props) {
-  const theme = props.route.params.theme;
+export default function Home({ route }) {
+  const theme = route.params.theme;
 
   return (
     <SafeAreaView style={theme.container}>
