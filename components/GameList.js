@@ -55,7 +55,7 @@ export default function GameList({ route, navigation }) {
                   style={theme.h1}
                   onPress={() =>
                     navigation.navigate('Game', {
-                      idDrink: `${item.$.objectid}`,
+                      gameId: `${item.$.objectid}`,
                     })
                   }
                 >

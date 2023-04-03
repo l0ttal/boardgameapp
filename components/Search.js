@@ -1,10 +1,17 @@
 import { useState } from 'react';
-import { View, Text, SafeAreaView, TextInput, Pressable } from 'react-native';
+import {
+  View,
+  Text,
+  SafeAreaView,
+  TextInput,
+  Pressable,
+  TouchableOpacity,
+} from 'react-native';
 import { FlatList } from 'react-native-gesture-handler';
 import parser from 'react-native-xml2js';
 import { GAME_API_URL } from './util';
 
-export default function Search({ route }) {
+export default function Search({ route, navigation }) {
   const theme = route.params.theme;
 
   const [gameData, setGameData] = useState(null);
@@ -52,7 +59,15 @@ export default function Search({ route }) {
             data={gameData}
             renderItem={({ item }) => (
               <View style={theme.textContainer}>
-                <Text style={theme.text}>{item.name[0]._}</Text>
+                <TouchableOpacity
+                  onPress={() =>
+                    navigation.navigate('Game', {
+                      gameId: `${item.$.objectid}`,
+                    })
+                  }
+                >
+                  <Text style={theme.text}>{item.name[0]._}</Text>
+                </TouchableOpacity>
               </View>
             )}
             keyExtractor={(item, index) => index}
