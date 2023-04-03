@@ -1,3 +1,5 @@
+export const GAME_API_URL = 'https://api.geekdo.com/xmlapi';
+
 export function randomGameIds() {
   let randomNumbers = [];
 

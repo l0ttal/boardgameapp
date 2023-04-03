@@ -1,6 +1,6 @@
 # boardgameapp
 
-Haaga-Helia / Mobiiliohjelmointi - SWD4TN021-3021 Lopputyö
+Haaga-Helia / Mobiiliohjelmointi - SWD4TN021-3021 Final project
 
 Custom Google Fonts (Raleway)
 

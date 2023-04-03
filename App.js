@@ -13,7 +13,8 @@ import { SafeAreaView, useColorScheme, View } from 'react-native';
 
 import Home from './components/Home';
 import GameGenres from './components/GameGenres';
-import styles from './components/Styles';
+import Search from './components/Search';
+import styles from './components/styles';
 
 SplashScreen.preventAutoHideAsync();
 
@@ -68,6 +69,8 @@ export default function App() {
                 iconName = focused ? 'ios-home' : 'ios-home-outline';
               } else if (route.name === 'Genres') {
                 iconName = focused ? 'planet' : 'planet-outline';
+              } else if (route.name === 'Search') {
+                iconName = focused ? 'search' : 'search-outline';
               }
 
               return <Ionicons name={iconName} size={size} color={color} />;
@@ -88,6 +91,11 @@ export default function App() {
           <Tab.Screen
             name="Genres"
             component={GameGenres}
+            initialParams={{ theme: theme }}
+          />
+          <Tab.Screen
+            name="Search"
+            component={Search}
             initialParams={{ theme: theme }}
           />
         </Tab.Navigator>
