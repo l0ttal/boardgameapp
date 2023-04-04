@@ -48,9 +48,9 @@ export default function App() {
       <View style={{ flexDirection: 'row', justifyContent: 'flex-end' }}>
         <Ionicons
           name={theme === styles.lightTheme ? 'moon' : 'sunny'}
-          size={24}
+          size={35}
           color={theme === styles.lightTheme ? '#1e1f1b' : '#ced0c8'}
-          style={{ marginRight: 20 }}
+          style={{ marginRight: 15, marginTop: 15 }}
           onPress={toggleColorScheme}
         />
       </View>

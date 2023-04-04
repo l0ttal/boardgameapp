@@ -61,7 +61,7 @@ export default function Search({ route, navigation }) {
               <View style={theme.textContainer}>
                 <TouchableOpacity
                   onPress={() =>
-                    navigation.navigate('Game', {
+                    navigation.navigate('game', {
                       gameId: `${item.$.objectid}`,
                     })
                   }

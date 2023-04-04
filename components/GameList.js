@@ -48,13 +48,15 @@ export default function GameList({ route, navigation }) {
       <View style={theme.textContainer}>
         {gameList && (
           <FlatList
+            initialNumToRender={5}
+            maxToRenderPerBatch={5}
             data={gameList}
             renderItem={({ item }) => (
               <View style={theme.textContainer}>
                 <Text
                   style={theme.h1}
                   onPress={() =>
-                    navigation.navigate('Game', {
+                    navigation.navigate('game', {
                       gameId: `${item.$.objectid}`,
                     })
                   }

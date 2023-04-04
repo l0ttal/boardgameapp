@@ -14,51 +14,58 @@ export default function TabNav({ theme }) {
     <Tab.Navigator
       screenOptions={({ route }) => ({
         headerShown: false,
-        tabBarIcon: ({ focused, color, size }) => {
+        tabBarIcon: ({ focused, color }) => {
           let iconName;
 
-          if (route.name === 'Home') {
+          if (route.name === 'home') {
             iconName = focused ? 'ios-home' : 'ios-home-outline';
-          } else if (route.name === 'Genres') {
+          } else if (route.name === 'genres') {
             iconName = focused ? 'planet' : 'planet-outline';
-          } else if (route.name === 'Search') {
+          } else if (route.name === 'search') {
             iconName = focused ? 'search' : 'search-outline';
-          } else if (route.name === 'Games') {
+          } else if (route.name === 'games') {
             iconName = focused ? 'library' : 'library-outline';
           }
 
-          return <Ionicons name={iconName} size={size} color={color} />;
+          return (
+            <Ionicons
+              name={iconName}
+              size={40}
+              color={color}
+              style={{ padding: 13 }}
+            />
+          );
         },
-        headerBackgroundContainerStyle: theme.container,
-        headerTitleStyle: theme.h1,
         tabBarActiveTintColor: theme.tabBarActive.color,
         tabBarInactiveTintColor: theme.tabBarInactive.color,
         tabBarActiveBackgroundColor: theme.container.backgroundColor,
         tabBarInactiveBackgroundColor: theme.container.backgroundColor,
+        tabBarShowLabel: false,
+        tabBarStyle: { marginBottom: 20 },
       })}
     >
       <Tab.Screen
-        name="Home"
+        name="home"
         component={Home}
         initialParams={{ theme: theme }}
       />
       <Tab.Screen
-        name="Games"
+        name="games"
         component={GameList}
         initialParams={{ theme: theme }}
       />
       <Tab.Screen
-        name="Genres"
+        name="genres"
         component={GameGenres}
         initialParams={{ theme: theme }}
       />
       <Tab.Screen
-        name="Search"
+        name="search"
         component={Search}
         initialParams={{ theme: theme }}
       />
       <Tab.Screen
-        name="Game"
+        name="game"
         component={Game}
         options={{
           tabBarStyle: { display: 'none' },
