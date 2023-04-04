@@ -3,7 +3,7 @@ import { View, Text, SafeAreaView } from 'react-native';
 import { FlatList } from 'react-native-gesture-handler';
 import parser from 'react-native-xml2js';
 
-import { randomGameIds } from './util';
+import { GAME_API_URL, randomGameIds } from './util';
 
 export default function GameGenres({ route, navigation }) {
   const theme = route.params.theme;
@@ -19,7 +19,7 @@ export default function GameGenres({ route, navigation }) {
     setIsLoading(true);
 
     randomGameIds().forEach((gameId) => {
-      fetch(`https://api.geekdo.com/xmlapi/boardgame/${gameId}`)
+      fetch(`${GAME_API_URL}/boardgame/${gameId}`)
         .then((response) => response.text())
         .then((data) => {
           parser.parseString(data, (error, result) => {
@@ -55,20 +55,20 @@ export default function GameGenres({ route, navigation }) {
               const categoryObjects = item.boardgamecategoryObjects;
               if (categoryObjects) {
                 const categories = categoryObjects.map((obj) => obj['_']);
-
-                return (
-                  <Text
-                    style={theme.h1}
-                    onPress={() =>
-                      navigation.navigate('GenreResult', {
-                        screen: 'GenreResult',
-                        game: item,
-                      })
-                    }
-                  >
-                    Fantasy
-                  </Text>
-                );
+                console.log(categoryObjects);
+                // return (
+                //   <Text
+                //     style={theme.h1}
+                //     onPress={() =>
+                //       navigation.navigate('GenreResult', {
+                //         screen: 'GenreResult',
+                //         game: item,
+                //       })
+                //     }
+                //   >
+                //     Fantasy
+                //   </Text>
+                // );
               }
             }}
             keyExtractor={(item, index) => index}

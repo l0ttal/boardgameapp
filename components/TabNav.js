@@ -5,6 +5,7 @@ import Home from './Home';
 import GameGenres from './GameGenres';
 import Search from './Search';
 import GameList from './GameList';
+import Game from './Game';
 
 const Tab = createBottomTabNavigator();
 
@@ -12,6 +13,7 @@ export default function TabNav({ theme }) {
   return (
     <Tab.Navigator
       screenOptions={({ route }) => ({
+        headerShown: false,
         tabBarIcon: ({ focused, color, size }) => {
           let iconName;
 
@@ -53,6 +55,17 @@ export default function TabNav({ theme }) {
       <Tab.Screen
         name="Search"
         component={Search}
+        initialParams={{ theme: theme }}
+      />
+      <Tab.Screen
+        name="Game"
+        component={Game}
+        options={{
+          tabBarStyle: { display: 'none' },
+          tabBarButton: (props) => {
+            return (props.style = []);
+          },
+        }}
         initialParams={{ theme: theme }}
       />
     </Tab.Navigator>
