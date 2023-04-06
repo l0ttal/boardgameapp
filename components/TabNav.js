@@ -1,5 +1,6 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Ionicons from 'react-native-vector-icons/Ionicons';
+import { ImageBackground } from 'react-native';
 
 import Home from './Home';
 import GameGenres from './GameGenres';
@@ -7,6 +8,9 @@ import Search from './Search';
 import GameList from './GameList';
 import Game from './Game';
 import styles from './styles';
+import link1 from './images/pexels-vlada.jpg';
+import link2 from './images/pexels-studio.jpg';
+import link3 from './images/pexels-dani.jpg';
 
 const Tab = createBottomTabNavigator();
 
@@ -14,7 +18,9 @@ export default function TabNav() {
   return (
     <Tab.Navigator
       screenOptions={({ route }) => ({
-        headerShown: false,
+        headerStatusBarHeight: 80,
+        headerTitleStyle: [styles.h2, { paddingBottom: 80, color: '#f4f3f0' }],
+        headerTitleAlign: 'left',
         tabBarIcon: ({ focused, color }) => {
           let iconName;
 
@@ -45,10 +51,53 @@ export default function TabNav() {
         tabBarStyle: { marginBottom: 20 },
       })}
     >
-      <Tab.Screen name="home" component={Home} />
-      <Tab.Screen name="games" component={GameList} />
-      <Tab.Screen name="genres" component={GameGenres} />
-      <Tab.Screen name="search" component={Search} />
+      <Tab.Screen
+        name="home"
+        component={Home}
+        options={{ headerShown: false }}
+      />
+      <Tab.Screen
+        name="games"
+        component={GameList}
+        options={{
+          headerBackground: () => (
+            <ImageBackground
+              source={link2}
+              resizeMode="cover"
+              imageStyle={styles.backgroundImg}
+              style={{ flex: 1, justifyContent: 'flex-end' }}
+            />
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="genres"
+        component={GameGenres}
+        options={{
+          headerBackground: () => (
+            <ImageBackground
+              source={link3}
+              resizeMode="cover"
+              imageStyle={styles.backgroundImg}
+              style={{ flex: 1, justifyContent: 'flex-end' }}
+            />
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="search"
+        component={Search}
+        options={{
+          headerBackground: () => (
+            <ImageBackground
+              source={link1}
+              resizeMode="cover"
+              imageStyle={styles.backgroundImg}
+              style={{ flex: 1, justifyContent: 'flex-end' }}
+            />
+          ),
+        }}
+      />
       <Tab.Screen
         name="game"
         component={Game}
