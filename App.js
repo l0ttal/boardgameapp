@@ -6,9 +6,7 @@ import {
   Raleway_700Bold,
 } from '@expo-google-fonts/raleway';
 import * as SplashScreen from 'expo-splash-screen';
-import Ionicons from 'react-native-vector-icons/Ionicons';
-import { useState } from 'react';
-import { SafeAreaView, useColorScheme, View } from 'react-native';
+import { SafeAreaView } from 'react-native';
 
 import TabNav from './components/TabNav';
 import styles from './components/styles';
@@ -16,13 +14,6 @@ import styles from './components/styles';
 SplashScreen.preventAutoHideAsync();
 
 export default function App() {
-  const colorScheme = useColorScheme();
-
-  const [theme, setTheme] = useState(
-    colorScheme === 'light' ? styles.lightTheme : styles.darkTheme
-  );
-  const splashBackground = theme.container.backgroundColor;
-
   const [fontsLoaded] = useFonts({
     Raleway_400Regular,
     Raleway_500Medium,
@@ -35,27 +26,12 @@ export default function App() {
     return null;
   }
 
-  const toggleColorScheme = () => {
-    setTheme(
-      theme === styles.lightTheme ? styles.darkTheme : styles.lightTheme
-    );
-  };
-
   return (
     <SafeAreaView
-      style={{ backgroundColor: theme.container.backgroundColor, flex: 1 }}
+      style={{ backgroundColor: styles.container.backgroundColor, flex: 1 }}
     >
-      <View style={{ flexDirection: 'row', justifyContent: 'flex-end' }}>
-        <Ionicons
-          name={theme === styles.lightTheme ? 'moon' : 'sunny'}
-          size={35}
-          color={theme === styles.lightTheme ? '#1e1f1b' : '#ced0c8'}
-          style={{ marginRight: 15, marginTop: 15 }}
-          onPress={toggleColorScheme}
-        />
-      </View>
       <NavigationContainer>
-        <TabNav theme={theme} />
+        <TabNav />
       </NavigationContainer>
     </SafeAreaView>
   );

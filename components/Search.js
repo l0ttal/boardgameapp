@@ -11,9 +11,9 @@ import { FlatList } from 'react-native-gesture-handler';
 import parser from 'react-native-xml2js';
 import { GAME_API_URL } from './util';
 
-export default function Search({ route, navigation }) {
-  const theme = route.params.theme;
+import styles from './styles';
 
+export default function Search({ route, navigation }) {
   const [gameData, setGameData] = useState(null);
   const [searchTerm, setSearchTerm] = useState(null);
 
@@ -32,9 +32,9 @@ export default function Search({ route, navigation }) {
         });
     } else {
       return (
-        <SafeAreaView style={theme.container}>
-          <View style={theme.textContainer}>
-            <Text style={theme.text}>That wasn't a valid searchterm!</Text>
+        <SafeAreaView style={styles.container}>
+          <View style={styles.textContainer}>
+            <Text style={styles.text}>That wasn't a valid searchterm!</Text>
           </View>
         </SafeAreaView>
       );
@@ -42,23 +42,23 @@ export default function Search({ route, navigation }) {
   };
 
   return (
-    <SafeAreaView style={theme.container}>
-      <View style={theme.textContainer}>
-        <Text style={theme.text}>Search by name: </Text>
+    <SafeAreaView style={styles.container}>
+      <View style={styles.textContainer}>
+        <Text style={styles.text}>Search by name: </Text>
         <TextInput
           placeholder={'e.g. Battle Wizards'}
           value={searchTerm}
-          style={theme.input}
+          style={styles.input}
           onChangeText={(text) => setSearchTerm(text)}
         />
-        <Pressable onPress={() => searchGame(searchTerm)} style={theme.button}>
-          <Text style={theme.buttonText}>Search</Text>
+        <Pressable onPress={() => searchGame(searchTerm)} style={styles.button}>
+          <Text style={styles.buttonText}>Search</Text>
         </Pressable>
         <View>
           <FlatList
             data={gameData}
             renderItem={({ item }) => (
-              <View style={theme.textContainer}>
+              <View style={styles.textContainer}>
                 <TouchableOpacity
                   onPress={() =>
                     navigation.navigate('game', {
@@ -66,7 +66,7 @@ export default function Search({ route, navigation }) {
                     })
                   }
                 >
-                  <Text style={theme.text}>{item.name[0]._}</Text>
+                  <Text style={styles.text}>{item.name[0]._}</Text>
                 </TouchableOpacity>
               </View>
             )}

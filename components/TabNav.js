@@ -6,10 +6,11 @@ import GameGenres from './GameGenres';
 import Search from './Search';
 import GameList from './GameList';
 import Game from './Game';
+import styles from './styles';
 
 const Tab = createBottomTabNavigator();
 
-export default function TabNav({ theme }) {
+export default function TabNav() {
   return (
     <Tab.Navigator
       screenOptions={({ route }) => ({
@@ -36,34 +37,18 @@ export default function TabNav({ theme }) {
             />
           );
         },
-        tabBarActiveTintColor: theme.tabBarActive.color,
-        tabBarInactiveTintColor: theme.tabBarInactive.color,
-        tabBarActiveBackgroundColor: theme.container.backgroundColor,
-        tabBarInactiveBackgroundColor: theme.container.backgroundColor,
+        tabBarActiveTintColor: styles.tabBarActive.color,
+        tabBarInactiveTintColor: styles.tabBarInactive.color,
+        tabBarActiveBackgroundColor: styles.container.backgroundColor,
+        tabBarInactiveBackgroundColor: styles.container.backgroundColor,
         tabBarShowLabel: false,
         tabBarStyle: { marginBottom: 20 },
       })}
     >
-      <Tab.Screen
-        name="home"
-        component={Home}
-        initialParams={{ theme: theme }}
-      />
-      <Tab.Screen
-        name="games"
-        component={GameList}
-        initialParams={{ theme: theme }}
-      />
-      <Tab.Screen
-        name="genres"
-        component={GameGenres}
-        initialParams={{ theme: theme }}
-      />
-      <Tab.Screen
-        name="search"
-        component={Search}
-        initialParams={{ theme: theme }}
-      />
+      <Tab.Screen name="home" component={Home} />
+      <Tab.Screen name="games" component={GameList} />
+      <Tab.Screen name="genres" component={GameGenres} />
+      <Tab.Screen name="search" component={Search} />
       <Tab.Screen
         name="game"
         component={Game}
@@ -73,7 +58,6 @@ export default function TabNav({ theme }) {
             return (props.style = []);
           },
         }}
-        initialParams={{ theme: theme }}
       />
     </Tab.Navigator>
   );

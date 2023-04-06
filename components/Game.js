@@ -11,10 +11,9 @@ import parser from 'react-native-xml2js';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 
 import { GAME_API_URL } from './util';
+import styles from './styles';
 
 export default function Game({ route, navigation }) {
-  const theme = route.params.theme;
-
   const [game, setGame] = useState(null);
 
   useEffect(() => {
@@ -37,24 +36,24 @@ export default function Game({ route, navigation }) {
   };
 
   return (
-    <SafeAreaView style={theme.container}>
+    <SafeAreaView style={styles.container}>
       {game && (
         <FlatList
           data={game}
           renderItem={({ item }) => (
             <>
               <TouchableOpacity onPress={() => navigation.goBack()}>
-                <Text style={theme.text}>
+                <Text style={styles.text}>
                   <Ionicons
                     name={'arrow-back-outline'}
                     size={35}
-                    style={theme.arrowContainer}
+                    style={styles.arrowContainer}
                   />
                 </Text>
               </TouchableOpacity>
-              <Image style={theme.img} source={{ uri: item.thumbnail[0] }} />
-              <View style={theme.textContainer}>
-                <Text style={theme.h1}>{item.name[0]._}</Text>
+              <Image style={styles.img} source={{ uri: item.thumbnail[0] }} />
+              <View style={styles.textContainer}>
+                <Text style={styles.h1}>{item.name[0]._}</Text>
               </View>
             </>
           )}
