@@ -6,12 +6,13 @@ export default StyleSheet.create({
     backgroundColor: '#d3cfc5',
   },
   listContainer: {
-    width: '90%',
+    width: '80%',
+    margin: 20,
+    justifyContent: 'space-evenly',
   },
   textContainer: {
     width: '80%',
     margin: 20,
-    alignItems: 'center',
   },
   text: {
     fontSize: 25,
@@ -24,9 +25,11 @@ export default StyleSheet.create({
     fontWeight: '500',
     fontFamily: 'Raleway_700Bold',
     color: '#2c2921',
-    letterSpacing: -2,
-    textTransform: 'uppercase',
+    letterSpacing: -3,
     flexBasis: 1,
+    textShadowColor: '#f4f3f0',
+    textShadowOffset: { width: 2, height: 2 },
+    textShadowRadius: 1,
   },
   h2: {
     fontSize: 45,
@@ -34,6 +37,12 @@ export default StyleSheet.create({
     fontFamily: 'Raleway_700Bold',
     color: '#2c2921',
     letterSpacing: 2,
+  },
+  h3: {
+    fontSize: 35,
+    fontWeight: '500',
+    fontFamily: 'Raleway_700Bold',
+    color: '#2c2921',
   },
   buttonText: {
     fontSize: 25,
@@ -60,8 +69,12 @@ export default StyleSheet.create({
   img: {
     width: '100%',
     height: 350,
-    marginTop: 10,
+    marginTop: 200,
     marginBottom: 10,
+    borderBottomLeftRadius: 200,
+    borderTopLeftRadius: 200,
+    position: 'absolute',
+    zIndex: -1,
   },
   backgroundImg: {
     borderTopLeftRadius: 200,
@@ -80,11 +93,17 @@ export default StyleSheet.create({
     borderWidth: 1,
     borderColor: '#0f0e0b',
   },
+  linkImgContainer: {
+    marginTop: 70,
+    marginBottom: 70,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
   input: {
     padding: 5,
     marginTop: 10,
     marginBottom: 10,
-    width: '70%',
+    width: '80%',
     height: 30,
     borderBottomColor: '#2c2921',
     borderBottomWidth: 2,
@@ -93,11 +112,4 @@ export default StyleSheet.create({
     color: '#0f0e0b',
     alignSelf: 'center',
   },
-
-  // arrowContainer: {
-  //   position: 'absolute',
-  //   top: 100,
-  //   left: 100,
-  //   zIndex: 1,
-  // },
 });

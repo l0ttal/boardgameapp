@@ -42,18 +42,45 @@ export default function Game({ route, navigation }) {
           data={game}
           renderItem={({ item }) => (
             <>
-              <TouchableOpacity onPress={() => navigation.goBack()}>
-                <Text style={styles.text}>
+              <View style={styles.textContainer}>
+                <TouchableOpacity onPress={() => navigation.goBack()}>
                   <Ionicons
                     name={'arrow-back-outline'}
                     size={35}
-                    style={styles.arrowContainer}
+                    style={styles.h1}
                   />
-                </Text>
-              </TouchableOpacity>
-              <Image style={styles.img} source={{ uri: item.thumbnail[0] }} />
+                </TouchableOpacity>
+              </View>
+
               <View style={styles.textContainer}>
-                <Text style={styles.h1}>{item.name[0]._}</Text>
+                <Text style={[styles.h1, { fontSize: 35 }]}>
+                  {item.name[0]._}
+                </Text>
+              </View>
+              <Image style={styles.img} source={{ uri: item.image[0] }} />
+              <View style={styles.textContainer}>
+                <Text style={styles.text}>
+                  {item.description[0]}
+                  Genre: {item.boardgamecategory[0]._}
+                  Year published: {item.yearpublished[0]}
+                  Publisher: {item.boardgamepublisher[0]._}
+                  Playing time: {item.playingtime[0]}
+                  Players: {item.minplayers[0]} - {item.maxplayers[0]}
+                  Age: {item.age[0]}
+                  Mechanics:
+                </Text>
+                {item.boardgamemechanic.map((item, index) => (
+                  <Text style={styles.text} key={index}>
+                    {item._}
+                  </Text>
+                ))}
+                <Text style={styles.text}>Expansions:</Text>
+                {item.boardgameexpansion &&
+                  item.boardgameexpansion.map((item, index) => (
+                    <Text style={styles.text} key={index}>
+                      {item._}
+                    </Text>
+                  ))}
               </View>
             </>
           )}

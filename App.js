@@ -6,10 +6,8 @@ import {
   Raleway_700Bold,
 } from '@expo-google-fonts/raleway';
 import * as SplashScreen from 'expo-splash-screen';
-import { SafeAreaView } from 'react-native';
 
 import TabNav from './components/TabNav';
-import styles from './components/styles';
 
 SplashScreen.preventAutoHideAsync();
 
@@ -27,12 +25,8 @@ export default function App() {
   }
 
   return (
-    <SafeAreaView
-      style={{ backgroundColor: styles.container.backgroundColor, flex: 1 }}
-    >
-      <NavigationContainer>
-        <TabNav />
-      </NavigationContainer>
-    </SafeAreaView>
+    <NavigationContainer>
+      <TabNav />
+    </NavigationContainer>
   );
 }

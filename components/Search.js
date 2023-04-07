@@ -9,6 +9,7 @@ import {
 } from 'react-native';
 import { FlatList } from 'react-native-gesture-handler';
 import parser from 'react-native-xml2js';
+import Ionicons from 'react-native-vector-icons/Ionicons';
 import { GAME_API_URL } from './util';
 
 import styles from './styles';
@@ -43,37 +44,47 @@ export default function Search({ route, navigation }) {
 
   return (
     <SafeAreaView style={styles.container}>
-      <View style={styles.textContainer}>
-        <Text style={styles.text}>Search by name: </Text>
+      <View
+        style={{ flexDirection: 'row', alignItems: 'flex-end', margin: 20 }}
+      >
         <TextInput
           placeholder={'e.g. Battle Wizards'}
+          placeholderTextColor={styles.text.color}
           value={searchTerm}
           style={styles.input}
           onChangeText={(text) => setSearchTerm(text)}
         />
-        <Pressable onPress={() => searchGame(searchTerm)} style={styles.button}>
-          <Text style={styles.buttonText}>Search</Text>
+        <Pressable
+          onPress={() => searchGame(searchTerm)}
+          style={[styles.button, { width: 55, marginLeft: 15 }]}
+        >
+          <Text style={styles.buttonText}>
+            <Ionicons name="search-outline" size={40} />
+          </Text>
         </Pressable>
-        <View>
-          <FlatList
-            data={gameData}
-            renderItem={({ item }) => (
-              <View style={styles.textContainer}>
-                <TouchableOpacity
-                  onPress={() =>
-                    navigation.navigate('game', {
-                      gameId: `${item.$.objectid}`,
-                    })
-                  }
-                >
-                  <Text style={styles.text}>{item.name[0]._}</Text>
-                </TouchableOpacity>
-              </View>
-            )}
-            keyExtractor={(item, index) => index}
-          />
-        </View>
       </View>
+      <FlatList
+        data={gameData}
+        ListHeaderComponent={
+          <View style={styles.textContainer}>
+            <Text style={styles.h3}>Results</Text>
+          </View>
+        }
+        renderItem={({ item }) => (
+          <View style={styles.listContainer}>
+            <TouchableOpacity
+              onPress={() =>
+                navigation.navigate('game', {
+                  gameId: `${item.$.objectid}`,
+                })
+              }
+            >
+              <Text style={styles.text}>{item.name[0]._}</Text>
+            </TouchableOpacity>
+          </View>
+        )}
+        keyExtractor={(item, index) => index}
+      />
     </SafeAreaView>
   );
 }

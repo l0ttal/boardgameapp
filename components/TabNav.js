@@ -45,8 +45,8 @@ export default function TabNav() {
         },
         tabBarActiveTintColor: styles.tabBarActive.color,
         tabBarInactiveTintColor: styles.tabBarInactive.color,
-        tabBarActiveBackgroundColor: styles.container.backgroundColor,
-        tabBarInactiveBackgroundColor: styles.container.backgroundColor,
+        tabBarActiveBackgroundColor: '#f4f3f0',
+        tabBarInactiveBackgroundColor: '#f4f3f0',
         tabBarShowLabel: false,
         tabBarStyle: { marginBottom: 20 },
       })}
@@ -54,7 +54,7 @@ export default function TabNav() {
       <Tab.Screen
         name="home"
         component={Home}
-        options={{ headerShown: false }}
+        options={{ headerShown: false, tabBarStyle: { display: 'none' } }}
       />
       <Tab.Screen
         name="games"
@@ -102,6 +102,7 @@ export default function TabNav() {
         name="game"
         component={Game}
         options={{
+          headerShown: false,
           tabBarStyle: { display: 'none' },
           tabBarButton: (props) => {
             return (props.style = []);

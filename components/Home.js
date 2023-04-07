@@ -22,7 +22,7 @@ export default function Home({ navigation }) {
         <View
           style={{
             marginTop: 100,
-            marginBottom: -90,
+            marginBottom: 20,
             marginLeft: 10,
             zIndex: 1,
           }}
@@ -32,7 +32,9 @@ export default function Home({ navigation }) {
 
         <View
           style={{
-            borderWidth: 5,
+            borderTopWidth: 5,
+            borderRightWidth: 5,
+            borderLeftWidth: 5,
             borderColor: '#0f0e0b',
             borderTopLeftRadius: 200,
             borderTopRightRadius: 200,
@@ -43,23 +45,11 @@ export default function Home({ navigation }) {
             resizeMode="cover"
             imageStyle={styles.backgroundImg}
             style={{ flex: 1, justifyContent: 'flex-end' }}
-          >
-            <Ionicons
-              name="chevron-down-outline"
-              size={40}
-              style={styles.icon}
-            />
-          </ImageBackground>
+          ></ImageBackground>
         </View>
+        <Ionicons name="chevron-down-outline" size={40} style={styles.icon} />
 
-        <View
-          style={{
-            marginTop: 90,
-            marginBottom: 70,
-            alignItems: 'center',
-            justifyContent: 'center',
-          }}
-        >
+        <View style={[styles.linkImgContainer, { marginTop: 90 }]}>
           <Image source={link1} style={styles.linkImg} />
           <TouchableOpacity onPress={() => navigation.navigate('search')}>
             <View style={styles.button}>
@@ -68,14 +58,7 @@ export default function Home({ navigation }) {
           </TouchableOpacity>
         </View>
 
-        <View
-          style={{
-            marginTop: 70,
-            marginBottom: 70,
-            alignItems: 'center',
-            justifyContent: 'center',
-          }}
-        >
+        <View style={styles.linkImgContainer}>
           <Image source={link2} style={styles.linkImg} />
           <TouchableOpacity onPress={() => navigation.navigate('games')}>
             <View style={styles.button}>
@@ -84,14 +67,7 @@ export default function Home({ navigation }) {
           </TouchableOpacity>
         </View>
 
-        <View
-          style={{
-            marginTop: 70,
-            marginBottom: 70,
-            alignItems: 'center',
-            justifyContent: 'center',
-          }}
-        >
+        <View style={styles.linkImgContainer}>
           <Image source={link3} style={styles.linkImg} />
           <TouchableOpacity onPress={() => navigation.navigate('genres')}>
             <View style={styles.button}>
