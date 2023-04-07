@@ -23,9 +23,17 @@ export default StyleSheet.create({
   tableText: {
     flex: 1,
     flexBasis: 0,
-    fontSize: 25,
+    fontSize: 20,
     color: '#000',
     fontFamily: 'Raleway_400Regular',
+    flexShrink: 1,
+  },
+  tableHeaders: {
+    flex: 1,
+    flexBasis: 0,
+    fontSize: 20,
+    color: '#000',
+    fontFamily: 'Raleway_700Bold',
     flexShrink: 1,
   },
   text: {

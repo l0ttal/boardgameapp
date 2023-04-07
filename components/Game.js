@@ -59,7 +59,7 @@ export default function Game({ route, navigation }) {
               </View>
               <Image style={styles.img} source={{ uri: item.image[0] }} />
               <View style={[styles.textContainer, { marginTop: 400 }]}>
-                <Text style={styles.text}>{item.description[0]}</Text>
+                <Text style={styles.tableText}>{item.description[0]}</Text>
               </View>
 
               <FlatList
@@ -67,46 +67,56 @@ export default function Game({ route, navigation }) {
                 renderItem={({ item }) => (
                   <>
                     <View style={styles.tableContainer}>
-                      <View style={{ flex: 1 }}>
-                        <Text style={styles.tableText}>Genre:</Text>
-                        <Text style={styles.tableText}>Year published:</Text>
-                        <Text style={styles.tableText}>Publisher:</Text>
-                        <Text style={styles.tableText}>Playing time:</Text>
-                        <Text style={styles.tableText}>Players:</Text>
-                        <Text style={styles.tableText}>Age:</Text>
-                        <Text style={styles.tableText}>Mechanics:</Text>
-                        <Text style={styles.tableText}>Expansions:</Text>
-                      </View>
-                      <View style={{ flex: 1 }}>
-                        <Text style={styles.tableText}>
-                          {item.boardgamecategory[0]._}
-                        </Text>
-                        <Text style={styles.tableText}>
-                          {item.yearpublished[0]}
-                        </Text>
-                        <Text style={styles.tableText}>
-                          {item.boardgamepublisher[0]._}
-                        </Text>
-                        <Text style={styles.tableText}>
-                          {item.playingtime[0]}
-                        </Text>
-                        <Text style={styles.tableText}>
-                          {item.minplayers[0]} - {item.maxplayers[0]}
-                        </Text>
-                        <Text style={styles.tableText}>{item.age[0]}</Text>
-                        <Text style={styles.tableText}>
-                          {item.boardgamemechanic
-                            .map((mechanic) => mechanic._)
-                            .join(', ')}
-                        </Text>
-                        <Text style={styles.tableText}>
-                          {item.boardgameexpansion
-                            ? item.boardgameexpansion
-                                .map((expansion) => expansion._)
-                                .join(', ')
-                            : ''}
-                        </Text>
-                      </View>
+                      <Text style={styles.tableHeaders}>Genre</Text>
+                      <Text style={styles.tableText}>
+                        {item.boardgamecategory[0]._}
+                      </Text>
+                    </View>
+                    <View style={styles.tableContainer}>
+                      <Text style={styles.tableHeaders}>Year published</Text>
+                      <Text style={styles.tableText}>
+                        {item.yearpublished[0]}
+                      </Text>
+                    </View>
+                    <View style={styles.tableContainer}>
+                      <Text style={styles.tableHeaders}>Publisher</Text>
+                      <Text style={styles.tableText}>
+                        {item.boardgamepublisher[0]._}
+                      </Text>
+                    </View>
+                    <View style={styles.tableContainer}>
+                      <Text style={styles.tableHeaders}>Playing time</Text>
+                      <Text style={styles.tableText}>
+                        {item.playingtime[0]}
+                      </Text>
+                    </View>
+                    <View style={styles.tableContainer}>
+                      <Text style={styles.tableHeaders}>Players</Text>
+                      <Text style={styles.tableText}>
+                        {item.minplayers[0]} - {item.maxplayers[0]}
+                      </Text>
+                    </View>
+                    <View style={styles.tableContainer}>
+                      <Text style={styles.tableHeaders}>Age</Text>
+                      <Text style={styles.tableText}>{item.age[0]}</Text>
+                    </View>
+                    <View style={styles.tableContainer}>
+                      <Text style={styles.tableHeaders}>Mechanics</Text>
+                      <Text style={styles.tableText}>
+                        {item.boardgamemechanic
+                          .map((mechanic) => mechanic._)
+                          .join(', ')}
+                      </Text>
+                    </View>
+                    <View style={styles.tableContainer}>
+                      <Text style={styles.tableHeaders}>Expansions</Text>
+                      <Text style={styles.tableText}>
+                        {item.boardgameexpansion
+                          ? item.boardgameexpansion
+                              .map((expansion) => expansion._)
+                              .join(', ')
+                          : 'None'}
+                      </Text>
                     </View>
                   </>
                 )}
