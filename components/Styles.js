@@ -11,8 +11,22 @@ export default StyleSheet.create({
     justifyContent: 'space-evenly',
   },
   textContainer: {
-    width: '80%',
+    width: '90%',
     margin: 20,
+  },
+  tableContainer: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    width: '90%',
+    margin: 20,
+  },
+  tableText: {
+    flex: 1,
+    flexBasis: 0,
+    fontSize: 25,
+    color: '#000',
+    fontFamily: 'Raleway_400Regular',
+    flexShrink: 1,
   },
   text: {
     fontSize: 25,
@@ -68,8 +82,8 @@ export default StyleSheet.create({
   },
   img: {
     width: '100%',
-    height: 350,
-    marginTop: 200,
+    height: 400,
+    marginTop: 260,
     marginBottom: 10,
     borderBottomLeftRadius: 200,
     borderTopLeftRadius: 200,

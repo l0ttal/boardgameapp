@@ -58,30 +58,60 @@ export default function Game({ route, navigation }) {
                 </Text>
               </View>
               <Image style={styles.img} source={{ uri: item.image[0] }} />
-              <View style={styles.textContainer}>
-                <Text style={styles.text}>
-                  {item.description[0]}
-                  Genre: {item.boardgamecategory[0]._}
-                  Year published: {item.yearpublished[0]}
-                  Publisher: {item.boardgamepublisher[0]._}
-                  Playing time: {item.playingtime[0]}
-                  Players: {item.minplayers[0]} - {item.maxplayers[0]}
-                  Age: {item.age[0]}
-                  Mechanics:
-                </Text>
-                {item.boardgamemechanic.map((item, index) => (
-                  <Text style={styles.text} key={index}>
-                    {item._}
-                  </Text>
-                ))}
-                <Text style={styles.text}>Expansions:</Text>
-                {item.boardgameexpansion &&
-                  item.boardgameexpansion.map((item, index) => (
-                    <Text style={styles.text} key={index}>
-                      {item._}
-                    </Text>
-                  ))}
+              <View style={[styles.textContainer, { marginTop: 400 }]}>
+                <Text style={styles.text}>{item.description[0]}</Text>
               </View>
+
+              <FlatList
+                data={game}
+                renderItem={({ item }) => (
+                  <>
+                    <View style={styles.tableContainer}>
+                      <View style={{ flex: 1 }}>
+                        <Text style={styles.tableText}>Genre:</Text>
+                        <Text style={styles.tableText}>Year published:</Text>
+                        <Text style={styles.tableText}>Publisher:</Text>
+                        <Text style={styles.tableText}>Playing time:</Text>
+                        <Text style={styles.tableText}>Players:</Text>
+                        <Text style={styles.tableText}>Age:</Text>
+                        <Text style={styles.tableText}>Mechanics:</Text>
+                        <Text style={styles.tableText}>Expansions:</Text>
+                      </View>
+                      <View style={{ flex: 1 }}>
+                        <Text style={styles.tableText}>
+                          {item.boardgamecategory[0]._}
+                        </Text>
+                        <Text style={styles.tableText}>
+                          {item.yearpublished[0]}
+                        </Text>
+                        <Text style={styles.tableText}>
+                          {item.boardgamepublisher[0]._}
+                        </Text>
+                        <Text style={styles.tableText}>
+                          {item.playingtime[0]}
+                        </Text>
+                        <Text style={styles.tableText}>
+                          {item.minplayers[0]} - {item.maxplayers[0]}
+                        </Text>
+                        <Text style={styles.tableText}>{item.age[0]}</Text>
+                        <Text style={styles.tableText}>
+                          {item.boardgamemechanic
+                            .map((mechanic) => mechanic._)
+                            .join(', ')}
+                        </Text>
+                        <Text style={styles.tableText}>
+                          {item.boardgameexpansion
+                            ? item.boardgameexpansion
+                                .map((expansion) => expansion._)
+                                .join(', ')
+                            : ''}
+                        </Text>
+                      </View>
+                    </View>
+                  </>
+                )}
+                keyExtractor={(item, index) => index}
+              />
             </>
           )}
           keyExtractor={(item, index) => index}
