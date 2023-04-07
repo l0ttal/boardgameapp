@@ -65,11 +65,6 @@ export default function Search({ route, navigation }) {
       </View>
       <FlatList
         data={gameData}
-        ListHeaderComponent={
-          <View style={styles.textContainer}>
-            <Text style={styles.h3}>Results</Text>
-          </View>
-        }
         renderItem={({ item }) => (
           <View style={styles.listContainer}>
             <TouchableOpacity
@@ -79,7 +74,7 @@ export default function Search({ route, navigation }) {
                 })
               }
             >
-              <Text style={styles.text}>{item.name[0]._}</Text>
+              <Text style={styles.h3}>{item.name[0]._}</Text>
             </TouchableOpacity>
           </View>
         )}
