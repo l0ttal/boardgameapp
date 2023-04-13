@@ -1,79 +1,107 @@
 import { useState, useEffect } from 'react';
-import { View, Text, SafeAreaView } from 'react-native';
+import {
+  View,
+  Text,
+  SafeAreaView,
+  ActivityIndicator,
+  Pressable,
+  TouchableOpacity,
+} from 'react-native';
 import { FlatList } from 'react-native-gesture-handler';
-import parser from 'react-native-xml2js';
+import Ionicons from 'react-native-vector-icons/Ionicons';
 
-import { GAME_API_URL, randomGameIds } from './util';
+import { GAME_API_URL, GAME_CATEGORIES_URL } from './util';
 import styles from './styles';
 
 export default function GameGenres({ route, navigation }) {
   const [isLoading, setIsLoading] = useState(false);
-  const [gameList, setGameList] = useState(null);
+  const [categoryData, setCategoryData] = useState(null);
+  const [gameData, setGameData] = useState(null);
 
-  // useEffect(() => {
-  //   fetchGames();
-  // }, []);
+  useEffect(() => {
+    fetchCategories();
+  }, []);
 
-  // const fetchGames = () => {
-  //   setIsLoading(true);
+  const fetchCategories = () => {
+    setIsLoading(true);
 
-  //   randomGameIds().forEach((gameId) => {
-  //     fetch(`${GAME_API_URL}/boardgame/${gameId}`)
-  //       .then((response) => response.text())
-  //       .then((data) => {
-  //         parser.parseString(data, (error, result) => {
-  //           if (error) {
-  //             console.error(`XML parse error: ${error}`);
-  //           } else {
-  //             setGameList(result.boardgames.boardgame);
-  //             setIsLoading(false);
-  //           }
-  //         });
-  //       })
-  //       .catch((error) => console.error(`API fetch error: ${error}`));
-  //   });
-  // };
+    fetch(`${GAME_CATEGORIES_URL}`)
+      .then((response) => response.json())
+      .then((data) => {
+        setCategoryData(data.categories);
+        setIsLoading(false);
+      })
+      .catch((error) => console.error(`API categories fetch error: ${error}`));
+  };
+
+  const fetchGames = (categoryId) => {
+    if (categoryId) {
+      setIsLoading(true);
+
+      fetch(`${GAME_API_URL}&categories=${categoryId}`)
+        .then((response) => response.json())
+        .then((data) => {
+          setGameData(data.games);
+          setIsLoading(false);
+        })
+        .catch((error) => console.error(`API games fetch error: ${error}`));
+    }
+  };
 
   if (isLoading) {
     return (
       <SafeAreaView style={styles.container}>
         <View style={styles.textContainer}>
-          <Text style={styles.text}>Loading...</Text>
+          <ActivityIndicator size="large" color="#000" />
         </View>
       </SafeAreaView>
     );
   }
 
-  // return (
-  //   <SafeAreaView style={styles.container}>
-  //     <View style={styles.textContainer}>
-  //       {gameList && (
-  //         <FlatList
-  //           data={gameList}
-  //           renderItem={({ item }) => {
-  //             const categoryObjects = item.boardgamecategoryObjects;
-  //             if (categoryObjects) {
-  //               const categories = categoryObjects.map((obj) => obj['_']);
-  //               console.log(categoryObjects);
-  //               // return (
-  //               //   <Text
-  //               //     style={styles.h1}
-  //               //     onPress={() =>
-  //               //       navigation.navigate('GenreResult', {
-  //               //         screen: 'GenreResult',
-  //               //         game: item,
-  //               //       })
-  //               //     }
-  //               //   >
-  //               //     Fantasy
-  //               //   </Text>
-  //               // );
-  //             }
-  //           }}
-  //           keyExtractor={(item, index) => index}
-  //         />
-  //       )}
-  //     </View>
-  //   </SafeAreaView>
-  // )
+  return (
+    <SafeAreaView style={styles.container}>
+      <View style={styles.textContainer}>
+        <FlatList
+          ListHeaderComponent={
+            <>
+              <FlatList
+                data={categoryData}
+                renderItem={({ item }) => (
+                  <>
+                    <View style={styles.listContainer}>
+                      <Pressable onPress={() => fetchGames(item.id)}>
+                        <Text style={styles.h3}>
+                          {item.name}{' '}
+                          <Ionicons name="arrow-forward-outline" size={30} />
+                        </Text>
+                      </Pressable>
+                    </View>
+                  </>
+                )}
+                keyExtractor={(item, index) => index}
+              />
+            </>
+          }
+          data={gameData}
+          renderItem={({ item }) => (
+            <>
+              <View style={styles.listContainer}>
+                <TouchableOpacity
+                  onPress={() =>
+                    navigation.navigate('game', {
+                      gameId: `${item.id}`,
+                      prevScreen: 'genres',
+                    })
+                  }
+                >
+                  <Text style={styles.h3}>{item.name}</Text>
+                </TouchableOpacity>
+              </View>
+            </>
+          )}
+          keyExtractor={(item, index) => index}
+        />
+      </View>
+    </SafeAreaView>
+  );
 }
