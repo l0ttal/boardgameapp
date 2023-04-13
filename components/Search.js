@@ -6,41 +6,46 @@ import {
   TextInput,
   Pressable,
   TouchableOpacity,
+  ActivityIndicator,
 } from 'react-native';
 import { FlatList } from 'react-native-gesture-handler';
-import parser from 'react-native-xml2js';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import { GAME_API_URL } from './util';
 
 import styles from './styles';
 
 export default function Search({ route, navigation }) {
+  const [isLoading, setIsLoading] = useState(false);
   const [gameData, setGameData] = useState(null);
   const [searchTerm, setSearchTerm] = useState(null);
 
   const searchGame = (searchTerm) => {
     if (searchTerm) {
-      fetch(`${GAME_API_URL}/search?search=${encodeURIComponent(searchTerm)}`)
-        .then((response) => response.text())
+      setIsLoading(true);
+
+      fetch(
+        `${GAME_API_URL}&fuzzy_match=true&name=${encodeURIComponent(
+          searchTerm
+        )}`
+      )
+        .then((response) => response.json())
         .then((data) => {
-          parser.parseString(data, (error, result) => {
-            if (error) {
-              console.error(`XML parse error: ${error}`);
-            } else {
-              setGameData(result.boardgames.boardgame);
-            }
-          });
-        });
-    } else {
-      return (
-        <SafeAreaView style={styles.container}>
-          <View style={styles.textContainer}>
-            <Text style={styles.text}>That wasn't a valid searchterm!</Text>
-          </View>
-        </SafeAreaView>
-      );
+          setGameData(data.games);
+          setIsLoading(false);
+        })
+        .catch((error) => console.error(`API fetch error: ${error}`));
     }
   };
+
+  if (isLoading) {
+    return (
+      <SafeAreaView style={styles.container}>
+        <View style={styles.textContainer}>
+          <ActivityIndicator size="large" color="#000" />
+        </View>
+      </SafeAreaView>
+    );
+  }
 
   return (
     <SafeAreaView style={styles.container}>
@@ -64,19 +69,18 @@ export default function Search({ route, navigation }) {
         </Pressable>
       </View>
       <FlatList
-        initialNumToRender={5}
         data={gameData}
         renderItem={({ item }) => (
           <View style={styles.listContainer}>
             <TouchableOpacity
               onPress={() =>
                 navigation.navigate('game', {
-                  gameId: `${item.$.objectid}`,
+                  gameId: `${item.id}`,
                   prevScreen: 'search',
                 })
               }
             >
-              <Text style={styles.h3}>{item.name[0]._}</Text>
+              <Text style={styles.h3}>{item.name}</Text>
             </TouchableOpacity>
           </View>
         )}

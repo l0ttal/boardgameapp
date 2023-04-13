@@ -2,6 +2,8 @@
 
 Haaga-Helia / Mobiiliohjelmointi - SWD4TN021-3021 Final project
 
-Custom Google Fonts (Raleway)
+Boardgame API: https://www.boardgameatlas.com/api/docs/
 
-react-native-xml2js XML Parser
+List, search and inspect boardgames. Browse games by category.
+
+Custom Google Fonts (Raleway)

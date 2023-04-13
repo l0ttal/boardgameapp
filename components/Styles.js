@@ -91,7 +91,6 @@ export default StyleSheet.create({
   img: {
     width: '100%',
     height: 400,
-    // marginTop: 200,
     marginBottom: 10,
     borderBottomLeftRadius: 200,
     borderTopLeftRadius: 200,

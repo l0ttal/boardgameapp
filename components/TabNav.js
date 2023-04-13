@@ -39,7 +39,7 @@ export default function TabNav() {
               name={iconName}
               size={40}
               color={color}
-              style={{ padding: 13 }}
+              style={{ padding: 5 }}
             />
           );
         },
@@ -48,7 +48,6 @@ export default function TabNav() {
         tabBarActiveBackgroundColor: '#f4f3f0',
         tabBarInactiveBackgroundColor: '#f4f3f0',
         tabBarShowLabel: false,
-        tabBarStyle: { marginBottom: 20 },
       })}
     >
       <Tab.Screen

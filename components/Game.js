@@ -5,15 +5,16 @@ import {
   SafeAreaView,
   TouchableOpacity,
   Image,
+  ActivityIndicator,
 } from 'react-native';
 import { FlatList } from 'react-native-gesture-handler';
-import parser from 'react-native-xml2js';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 
 import { GAME_API_URL } from './util';
 import styles from './styles';
 
 export default function Game({ route, navigation }) {
+  const [isLoading, setIsLoading] = useState(false);
   const [game, setGame] = useState(null);
 
   useEffect(() => {
@@ -21,19 +22,26 @@ export default function Game({ route, navigation }) {
   }, [route.params.gameId]);
 
   const fetchGame = () => {
-    fetch(`${GAME_API_URL}/boardgame/${route.params.gameId}`)
-      .then((response) => response.text())
+    setIsLoading(true);
+
+    fetch(`${GAME_API_URL}&ids=${route.params.gameId}`)
+      .then((response) => response.json())
       .then((data) => {
-        parser.parseString(data, (error, result) => {
-          if (error) {
-            console.error(`XML parse error: ${error}`);
-          } else {
-            setGame(result.boardgames.boardgame);
-          }
-        });
+        setGame(data.games);
+        setIsLoading(false);
       })
       .catch((error) => console.error(`API fetch error: ${error}`));
   };
+
+  if (isLoading) {
+    return (
+      <SafeAreaView style={styles.container}>
+        <View style={styles.textContainer}>
+          <ActivityIndicator size="large" color="#000" />
+        </View>
+      </SafeAreaView>
+    );
+  }
 
   return (
     <SafeAreaView style={styles.container}>
@@ -55,13 +63,11 @@ export default function Game({ route, navigation }) {
               </View>
 
               <View style={styles.textContainer}>
-                <Text style={[styles.h1, { fontSize: 35 }]}>
-                  {item.name[0]._}
-                </Text>
+                <Text style={[styles.h1, { fontSize: 35 }]}>{item.name}</Text>
               </View>
-              <Image style={styles.img} source={{ uri: item.image[0] }} />
+              <Image style={styles.img} source={{ uri: item.image_url }} />
               <View style={[styles.textContainer, { position: 'relative' }]}>
-                <Text style={styles.tableText}>{item.description[0]}</Text>
+                <Text style={styles.tableText}>{item.description_preview}</Text>
               </View>
 
               <FlatList
@@ -69,55 +75,45 @@ export default function Game({ route, navigation }) {
                 renderItem={({ item }) => (
                   <>
                     <View style={styles.tableContainer}>
-                      <Text style={styles.tableHeaders}>Genre</Text>
+                      <Text style={styles.tableHeaders}>Categories</Text>
                       <Text style={styles.tableText}>
-                        {item.boardgamecategory[0]._}
-                      </Text>
-                    </View>
-                    <View style={styles.tableContainer}>
-                      <Text style={styles.tableHeaders}>Year published</Text>
-                      <Text style={styles.tableText}>
-                        {item.yearpublished[0]}
-                      </Text>
-                    </View>
-                    <View style={styles.tableContainer}>
-                      <Text style={styles.tableHeaders}>Publisher</Text>
-                      <Text style={styles.tableText}>
-                        {item.boardgamepublisher[0]._}
-                      </Text>
-                    </View>
-                    <View style={styles.tableContainer}>
-                      <Text style={styles.tableHeaders}>Playing time</Text>
-                      <Text style={styles.tableText}>
-                        {item.playingtime[0]}
-                      </Text>
-                    </View>
-                    <View style={styles.tableContainer}>
-                      <Text style={styles.tableHeaders}>Players</Text>
-                      <Text style={styles.tableText}>
-                        {item.minplayers[0]} - {item.maxplayers[0]}
-                      </Text>
-                    </View>
-                    <View style={styles.tableContainer}>
-                      <Text style={styles.tableHeaders}>Age</Text>
-                      <Text style={styles.tableText}>{item.age[0]}</Text>
-                    </View>
-                    <View style={styles.tableContainer}>
-                      <Text style={styles.tableHeaders}>Mechanics</Text>
-                      <Text style={styles.tableText}>
-                        {item.boardgamemechanic
-                          ? item.boardgamemechanic
-                              .map((mechanic) => mechanic._)
+                        {item.categories
+                          ? item.categories
+                              .map((category) => category.id)
                               .join(', ')
                           : 'None'}
                       </Text>
                     </View>
                     <View style={styles.tableContainer}>
-                      <Text style={styles.tableHeaders}>Expansions</Text>
+                      <Text style={styles.tableHeaders}>Year published</Text>
                       <Text style={styles.tableText}>
-                        {item.boardgameexpansion
-                          ? item.boardgameexpansion
-                              .map((expansion) => expansion._)
+                        {item.year_published}
+                      </Text>
+                    </View>
+                    <View style={styles.tableContainer}>
+                      <Text style={styles.tableHeaders}>Publisher</Text>
+                      <Text style={styles.tableText}>
+                        {item.primary_publisher.name}
+                      </Text>
+                    </View>
+                    <View style={styles.tableContainer}>
+                      <Text style={styles.tableHeaders}>Playing time</Text>
+                      <Text style={styles.tableText}>{item.playtime}</Text>
+                    </View>
+                    <View style={styles.tableContainer}>
+                      <Text style={styles.tableHeaders}>Players</Text>
+                      <Text style={styles.tableText}>{item.players}</Text>
+                    </View>
+                    <View style={styles.tableContainer}>
+                      <Text style={styles.tableHeaders}>Age</Text>
+                      <Text style={styles.tableText}>{item.min_age}</Text>
+                    </View>
+                    <View style={styles.tableContainer}>
+                      <Text style={styles.tableHeaders}>Mechanics</Text>
+                      <Text style={styles.tableText}>
+                        {item.mechanics
+                          ? item.mechanics
+                              .map((mechanic) => mechanic.id)
                               .join(', ')
                           : 'None'}
                       </Text>
