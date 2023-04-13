@@ -64,6 +64,7 @@ export default function Search({ route, navigation }) {
         </Pressable>
       </View>
       <FlatList
+        initialNumToRender={5}
         data={gameData}
         renderItem={({ item }) => (
           <View style={styles.listContainer}>
@@ -71,6 +72,7 @@ export default function Search({ route, navigation }) {
               onPress={() =>
                 navigation.navigate('game', {
                   gameId: `${item.$.objectid}`,
+                  prevScreen: 'search',
                 })
               }
             >

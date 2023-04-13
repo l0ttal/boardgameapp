@@ -47,7 +47,6 @@ export default function GameList({ route, navigation }) {
       {gameList && (
         <FlatList
           initialNumToRender={5}
-          maxToRenderPerBatch={5}
           data={gameList}
           renderItem={({ item }) => (
             <View style={styles.listContainer}>
@@ -56,6 +55,7 @@ export default function GameList({ route, navigation }) {
                 onPress={() =>
                   navigation.navigate('game', {
                     gameId: `${item.$.objectid}`,
+                    prevScreen: 'games',
                   })
                 }
               >

@@ -43,7 +43,9 @@ export default function Game({ route, navigation }) {
           renderItem={({ item }) => (
             <>
               <View style={styles.textContainer}>
-                <TouchableOpacity onPress={() => navigation.goBack()}>
+                <TouchableOpacity
+                  onPress={() => navigation.navigate(route.params.prevScreen)}
+                >
                   <Ionicons
                     name={'arrow-back-outline'}
                     size={35}
@@ -58,7 +60,7 @@ export default function Game({ route, navigation }) {
                 </Text>
               </View>
               <Image style={styles.img} source={{ uri: item.image[0] }} />
-              <View style={[styles.textContainer, { marginTop: 400 }]}>
+              <View style={[styles.textContainer, { position: 'relative' }]}>
                 <Text style={styles.tableText}>{item.description[0]}</Text>
               </View>
 
@@ -104,8 +106,10 @@ export default function Game({ route, navigation }) {
                       <Text style={styles.tableHeaders}>Mechanics</Text>
                       <Text style={styles.tableText}>
                         {item.boardgamemechanic
-                          .map((mechanic) => mechanic._)
-                          .join(', ')}
+                          ? item.boardgamemechanic
+                              .map((mechanic) => mechanic._)
+                              .join(', ')
+                          : 'None'}
                       </Text>
                     </View>
                     <View style={styles.tableContainer}>

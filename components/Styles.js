@@ -61,7 +61,7 @@ export default StyleSheet.create({
     letterSpacing: 2,
   },
   h3: {
-    fontSize: 35,
+    fontSize: 30,
     fontWeight: '500',
     fontFamily: 'Raleway_700Bold',
     color: '#2c2921',
@@ -91,11 +91,11 @@ export default StyleSheet.create({
   img: {
     width: '100%',
     height: 400,
-    marginTop: 260,
+    // marginTop: 200,
     marginBottom: 10,
     borderBottomLeftRadius: 200,
     borderTopLeftRadius: 200,
-    position: 'absolute',
+    position: 'relative',
     zIndex: -1,
   },
   backgroundImg: {
