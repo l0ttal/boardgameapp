@@ -1,4 +1,3 @@
-/components/util.js
 node_modules/
 .expo/
 dist/
@@ -10,6 +9,7 @@ npm-debug.*
 *.mobileprovision
 *.orig.*
 web-build/
+/components/util.js
 
 # macOS
 .DS_Store

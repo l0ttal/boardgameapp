@@ -37,27 +37,29 @@ export default function GameList({ route, navigation }) {
 
   return (
     <SafeAreaView style={styles.container}>
-      {gameList && (
-        <FlatList
-          data={gameList}
-          renderItem={({ item }) => (
-            <View style={styles.listContainer}>
-              <Text
-                style={styles.h3}
-                onPress={() =>
-                  navigation.navigate('game', {
-                    gameId: `${item.id}`,
-                    prevScreen: 'games',
-                  })
-                }
-              >
-                {item.name}
-              </Text>
-            </View>
-          )}
-          keyExtractor={(item, index) => index}
-        />
-      )}
+      <View style={styles.textContainer}>
+        {gameList && (
+          <FlatList
+            data={gameList}
+            renderItem={({ item }) => (
+              <View style={styles.listContainer}>
+                <Text
+                  style={styles.h3}
+                  onPress={() =>
+                    navigation.navigate('game', {
+                      gameId: `${item.id}`,
+                      prevScreen: 'games',
+                    })
+                  }
+                >
+                  {item.name}
+                </Text>
+              </View>
+            )}
+            keyExtractor={(item, index) => index}
+          />
+        )}
+      </View>
     </SafeAreaView>
   );
 }

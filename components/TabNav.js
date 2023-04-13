@@ -3,7 +3,7 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 import { ImageBackground } from 'react-native';
 
 import Home from './Home';
-import GameGenres from './GameGenres';
+import GameCategories from './GameCategories';
 import Search from './Search';
 import GameList from './GameList';
 import Game from './Game';
@@ -26,7 +26,7 @@ export default function TabNav() {
 
           if (route.name === 'home') {
             iconName = focused ? 'ios-home' : 'ios-home-outline';
-          } else if (route.name === 'genres') {
+          } else if (route.name === 'categories') {
             iconName = focused ? 'planet' : 'planet-outline';
           } else if (route.name === 'search') {
             iconName = focused ? 'search' : 'search-outline';
@@ -70,8 +70,8 @@ export default function TabNav() {
         }}
       />
       <Tab.Screen
-        name="genres"
-        component={GameGenres}
+        name="categories"
+        component={GameCategories}
         options={{
           headerBackground: () => (
             <ImageBackground

@@ -69,9 +69,9 @@ export default function Home({ navigation }) {
 
         <View style={styles.linkImgContainer}>
           <Image source={link3} style={styles.linkImg} />
-          <TouchableOpacity onPress={() => navigation.navigate('genres')}>
+          <TouchableOpacity onPress={() => navigation.navigate('categories')}>
             <View style={styles.button}>
-              <Text style={styles.buttonText}>Browse by genre</Text>
+              <Text style={styles.buttonText}>Browse by category</Text>
             </View>
           </TouchableOpacity>
         </View>
