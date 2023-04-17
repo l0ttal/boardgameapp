@@ -10,13 +10,14 @@ import {
 import { FlatList } from 'react-native-gesture-handler';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 
-import { GAME_API_URL, fetchCategories } from './util';
+import { GAME_API_URL, fetchCategories, fetchMechanics } from './util';
 import styles from './styles';
 
 export default function Game({ route, navigation }) {
   const [isLoading, setIsLoading] = useState(false);
   const [game, setGame] = useState(null);
-  const [categories, setCategories] = useState(null);
+  const [gameCategories, setGameCategories] = useState(null);
+  const [gameMechanics, setGameMechanics] = useState(null);
 
   useEffect(() => {
     fetchGame();
@@ -37,13 +38,25 @@ export default function Game({ route, navigation }) {
   useEffect(() => {
     const fetchCategoriesData = async () => {
       try {
-        const gameCategories = await fetchCategories();
-        setCategories(gameCategories);
+        const categories = await fetchCategories();
+        setGameCategories(categories);
       } catch (error) {
         console.error(`Error fetching categories: ${error}`);
       }
     };
     fetchCategoriesData();
+  }, []);
+
+  useEffect(() => {
+    const fetchMechanicsData = async () => {
+      try {
+        const mechanics = await fetchMechanics();
+        setGameMechanics(mechanics);
+      } catch (error) {
+        console.error(`Error fetching mechanics: ${error}`);
+      }
+    };
+    fetchMechanicsData();
   }, []);
 
   if (isLoading) {
@@ -93,8 +106,8 @@ export default function Game({ route, navigation }) {
                         {item.categories
                           ? item.categories
                               .map((category) => {
-                                if (categories) {
-                                  const matchingCategory = categories.find(
+                                if (gameCategories) {
+                                  const matchingCategory = gameCategories.find(
                                     (cat) => cat.id === category.id
                                   );
                                   return matchingCategory
@@ -135,7 +148,16 @@ export default function Game({ route, navigation }) {
                       <Text style={styles.tableText}>
                         {item.mechanics
                           ? item.mechanics
-                              .map((mechanic) => mechanic.id)
+                              .map((mechanic) => {
+                                if (gameMechanics) {
+                                  const matchingMechanic = gameMechanics.find(
+                                    (mec) => mec.id === mechanic.id
+                                  );
+                                  return matchingMechanic
+                                    ? matchingMechanic.name
+                                    : '-';
+                                }
+                              })
                               .join(', ')
                           : '-'}
                       </Text>
