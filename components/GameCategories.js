@@ -10,7 +10,7 @@ import {
 import { FlatList } from 'react-native-gesture-handler';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 
-import { GAME_API_URL, GAME_CATEGORIES_URL } from './util';
+import { GAME_API_URL, fetchCategories } from './util';
 import styles from './styles';
 
 export default function GameCategories({ route, navigation }) {
@@ -20,20 +20,14 @@ export default function GameCategories({ route, navigation }) {
   const [selectedCategoryId, setSelectedCategoryId] = useState(null);
 
   useEffect(() => {
-    fetchCategories();
-  }, []);
-
-  const fetchCategories = () => {
     setIsLoading(true);
-
-    fetch(`${GAME_CATEGORIES_URL}`)
-      .then((response) => response.json())
-      .then((data) => {
-        setCategoryData(data.categories);
-        setIsLoading(false);
-      })
-      .catch((error) => console.error(`API categories fetch error: ${error}`));
-  };
+    const fetchData = async () => {
+      const categories = await fetchCategories();
+      setCategoryData(categories);
+    };
+    setIsLoading(false);
+    fetchData();
+  }, []);
 
   const fetchGames = (categoryId) => {
     if (categoryId) {

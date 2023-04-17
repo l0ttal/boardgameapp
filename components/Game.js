@@ -10,12 +10,13 @@ import {
 import { FlatList } from 'react-native-gesture-handler';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 
-import { GAME_API_URL } from './util';
+import { GAME_API_URL, fetchCategories } from './util';
 import styles from './styles';
 
 export default function Game({ route, navigation }) {
   const [isLoading, setIsLoading] = useState(false);
   const [game, setGame] = useState(null);
+  const [categories, setCategories] = useState(null);
 
   useEffect(() => {
     fetchGame();
@@ -32,6 +33,18 @@ export default function Game({ route, navigation }) {
       })
       .catch((error) => console.error(`API fetch error: ${error}`));
   };
+
+  useEffect(() => {
+    const fetchCategoriesData = async () => {
+      try {
+        const gameCategories = await fetchCategories();
+        setCategories(gameCategories);
+      } catch (error) {
+        console.error(`Error fetching categories: ${error}`);
+      }
+    };
+    fetchCategoriesData();
+  }, []);
 
   if (isLoading) {
     return (
@@ -79,9 +92,18 @@ export default function Game({ route, navigation }) {
                       <Text style={styles.tableText}>
                         {item.categories
                           ? item.categories
-                              .map((category) => category.id)
+                              .map((category) => {
+                                if (categories) {
+                                  const matchingCategory = categories.find(
+                                    (cat) => cat.id === category.id
+                                  );
+                                  return matchingCategory
+                                    ? matchingCategory.name
+                                    : '-';
+                                }
+                              })
                               .join(', ')
-                          : 'None'}
+                          : '-'}
                       </Text>
                     </View>
                     <View style={styles.tableContainer}>
@@ -115,7 +137,7 @@ export default function Game({ route, navigation }) {
                           ? item.mechanics
                               .map((mechanic) => mechanic.id)
                               .join(', ')
-                          : 'None'}
+                          : '-'}
                       </Text>
                     </View>
                   </>
