@@ -1,10 +1,9 @@
 import { NavigationContainer } from '@react-navigation/native';
+import { useFonts, CrimsonText_700Bold } from '@expo-google-fonts/crimson-text';
 import {
-  useFonts,
-  Raleway_400Regular,
-  Raleway_500Medium,
-  Raleway_700Bold,
-} from '@expo-google-fonts/raleway';
+  JosefinSans_400Regular,
+  JosefinSans_700Bold,
+} from '@expo-google-fonts/josefin-sans';
 import * as SplashScreen from 'expo-splash-screen';
 
 import TabNav from './components/TabNav';
@@ -13,9 +12,9 @@ SplashScreen.preventAutoHideAsync();
 
 export default function App() {
   const [fontsLoaded] = useFonts({
-    Raleway_400Regular,
-    Raleway_500Medium,
-    Raleway_700Bold,
+    JosefinSans_400Regular,
+    JosefinSans_700Bold,
+    CrimsonText_700Bold,
   });
 
   if (fontsLoaded) {
