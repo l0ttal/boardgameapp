@@ -9,11 +9,23 @@ import {
 } from 'react-native';
 import { FlatList } from 'react-native-gesture-handler';
 import Ionicons from 'react-native-vector-icons/Ionicons';
+import { initializeApp } from 'firebase/app';
+import { getDatabase, push, ref } from 'firebase/database';
 
-import { GAME_API_URL, fetchCategories, fetchMechanics } from './util';
+import {
+  GAME_API_URL,
+  fetchCategories,
+  fetchMechanics,
+  firebaseConfig,
+  FIREBASE_DB_URL,
+} from './util';
 import styles from './styles';
 
 export default function Game({ route, navigation }) {
+  // Initialize Firebase
+  const firebase = initializeApp(firebaseConfig);
+  const database = getDatabase(firebase, FIREBASE_DB_URL);
+
   const [isLoading, setIsLoading] = useState(false);
   const [game, setGame] = useState(null);
   const [gameCategories, setGameCategories] = useState(null);
@@ -59,6 +71,14 @@ export default function Game({ route, navigation }) {
     fetchMechanicsData();
   }, []);
 
+  const saveFavouriteGame = (gameId, gameName, gameImg) => {
+    push(ref(database, 'boardgames/'), {
+      gameId: gameId,
+      gameName: gameName,
+      gameImg: gameImg,
+    });
+  };
+
   if (isLoading) {
     return (
       <SafeAreaView style={styles.container}>
@@ -76,7 +96,7 @@ export default function Game({ route, navigation }) {
           data={game}
           renderItem={({ item }) => (
             <>
-              <View style={styles.textContainer}>
+              <View style={styles.tableContainer}>
                 <TouchableOpacity
                   onPress={() => navigation.navigate(route.params.prevScreen)}
                 >
@@ -86,13 +106,34 @@ export default function Game({ route, navigation }) {
                     style={styles.h1}
                   />
                 </TouchableOpacity>
+                <TouchableOpacity
+                  onPress={() =>
+                    saveFavouriteGame(item.id, item.name, item.image_url)
+                  }
+                >
+                  <Ionicons name={'star-outline'} size={35} style={styles.h2} />
+                </TouchableOpacity>
               </View>
 
-              <View style={styles.textContainer}>
+              <View
+                style={{
+                  borderTopWidth: 5,
+                  borderRightWidth: 5,
+                  borderLeftWidth: 5,
+                  borderColor: '#0f0e0b',
+                  borderTopLeftRadius: 200,
+                  borderTopRightRadius: 200,
+                }}
+              >
+                <Image
+                  style={styles.backgroundImg}
+                  source={{ uri: item.image_url }}
+                />
+              </View>
+              <View style={[styles.textContainer, { position: 'relative' }]}>
                 <Text style={[styles.h1, { fontSize: 35 }]}>{item.name}</Text>
               </View>
-              <Image style={styles.img} source={{ uri: item.image_url }} />
-              <View style={[styles.textContainer, { position: 'relative' }]}>
+              <View style={styles.textContainer}>
                 <Text style={styles.tableText}>{item.description_preview}</Text>
               </View>
 

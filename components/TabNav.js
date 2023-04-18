@@ -7,10 +7,12 @@ import GameCategories from './GameCategories';
 import Search from './Search';
 import GameList from './GameList';
 import Game from './Game';
+import FavouriteGames from './FavouriteGames';
 import styles from './styles';
 import link1 from './images/pexels-vlada.jpg';
 import link2 from './images/pexels-studio.jpg';
 import link3 from './images/pexels-dani.jpg';
+import link4 from './images/pexels-egidijus.jpg';
 
 const Tab = createBottomTabNavigator();
 
@@ -32,6 +34,8 @@ export default function TabNav() {
             iconName = focused ? 'search' : 'search-outline';
           } else if (route.name === 'games') {
             iconName = focused ? 'library' : 'library-outline';
+          } else if (route.name === 'favourites') {
+            iconName = focused ? 'star' : 'star-outline';
           }
 
           return (
@@ -90,6 +94,20 @@ export default function TabNav() {
           headerBackground: () => (
             <ImageBackground
               source={link1}
+              resizeMode="cover"
+              imageStyle={styles.backgroundImg}
+              style={{ flex: 1, justifyContent: 'flex-end' }}
+            />
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="favourites"
+        component={FavouriteGames}
+        options={{
+          headerBackground: () => (
+            <ImageBackground
+              source={link4}
               resizeMode="cover"
               imageStyle={styles.backgroundImg}
               style={{ flex: 1, justifyContent: 'flex-end' }}

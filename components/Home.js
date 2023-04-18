@@ -13,6 +13,7 @@ import backgroundImage from './images/pexels-cottonbro.jpg';
 import link1 from './images/pexels-vlada.jpg';
 import link2 from './images/pexels-studio.jpg';
 import link3 from './images/pexels-dani.jpg';
+import link4 from './images/pexels-egidijus.jpg';
 import styles from './styles';
 
 export default function Home({ navigation }) {
@@ -72,6 +73,15 @@ export default function Home({ navigation }) {
           <TouchableOpacity onPress={() => navigation.navigate('categories')}>
             <View style={styles.button}>
               <Text style={styles.buttonText}>Browse by category</Text>
+            </View>
+          </TouchableOpacity>
+        </View>
+
+        <View style={styles.linkImgContainer}>
+          <Image source={link4} style={styles.linkImg} />
+          <TouchableOpacity onPress={() => navigation.navigate('favourites')}>
+            <View style={styles.button}>
+              <Text style={styles.buttonText}>Favourites</Text>
             </View>
           </TouchableOpacity>
         </View>

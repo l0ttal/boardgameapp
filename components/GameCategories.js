@@ -70,7 +70,7 @@ export default function GameCategories({ route, navigation }) {
                   <Pressable onPress={() => handleCategoryPress(item.id)}>
                     <Text style={styles.h3}>
                       {item.name}{' '}
-                      <Ionicons name="arrow-forward-outline" size={30} />
+                      <Ionicons name="chevron-down-outline" size={30} />
                     </Text>
                   </Pressable>
                 </View>
