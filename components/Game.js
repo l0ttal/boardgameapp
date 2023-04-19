@@ -9,23 +9,16 @@ import {
 } from 'react-native';
 import { FlatList } from 'react-native-gesture-handler';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import { initializeApp } from 'firebase/app';
-import { getDatabase, push, ref } from 'firebase/database';
 
 import {
   GAME_API_URL,
   fetchCategories,
   fetchMechanics,
-  firebaseConfig,
-  FIREBASE_DB_URL,
+  checkIfGameIsAlreadyFavourite,
 } from './util';
 import styles from './styles';
 
 export default function Game({ route, navigation }) {
-  // Initialize Firebase
-  const firebase = initializeApp(firebaseConfig);
-  const database = getDatabase(firebase, FIREBASE_DB_URL);
-
   const [isLoading, setIsLoading] = useState(false);
   const [game, setGame] = useState(null);
   const [gameCategories, setGameCategories] = useState(null);
@@ -71,14 +64,6 @@ export default function Game({ route, navigation }) {
     fetchMechanicsData();
   }, []);
 
-  const saveFavouriteGame = (gameId, gameName, gameImg) => {
-    push(ref(database, 'boardgames/'), {
-      gameId: gameId,
-      gameName: gameName,
-      gameImg: gameImg,
-    });
-  };
-
   if (isLoading) {
     return (
       <SafeAreaView style={styles.container}>
@@ -108,7 +93,11 @@ export default function Game({ route, navigation }) {
                 </TouchableOpacity>
                 <TouchableOpacity
                   onPress={() =>
-                    saveFavouriteGame(item.id, item.name, item.image_url)
+                    checkIfGameIsAlreadyFavourite(
+                      item.id,
+                      item.name,
+                      item.image_url
+                    )
                   }
                 >
                   <Ionicons name={'star-outline'} size={35} style={styles.h2} />

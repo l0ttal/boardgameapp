@@ -9,15 +9,9 @@ import {
 } from 'react-native';
 import { FlatList } from 'react-native-gesture-handler';
 import { initializeApp } from 'firebase/app';
-import { getDatabase, push, ref, onValue } from 'firebase/database';
+import { getDatabase, ref, onValue } from 'firebase/database';
 
-import {
-  GAME_API_URL,
-  fetchCategories,
-  fetchMechanics,
-  firebaseConfig,
-  FIREBASE_DB_URL,
-} from './util';
+import { firebaseConfig, FIREBASE_DB_URL } from './util';
 import styles from './styles';
 
 export default function FavouriteGames({ route, navigation }) {
@@ -30,11 +24,14 @@ export default function FavouriteGames({ route, navigation }) {
 
   useEffect(() => {
     setIsLoading(true);
-    const itemsRef = ref(database, 'boardgames/');
-    onValue(itemsRef, (snapshot) => {
+    const gamesRef = ref(database, 'boardgames/');
+    onValue(gamesRef, (snapshot) => {
       const data = snapshot.val();
-      setGames(Object.values(data));
-      setIsLoading(false);
+
+      if (data) {
+        setGames(Object.values(data));
+        setIsLoading(false);
+      }
     });
   }, []);
 
