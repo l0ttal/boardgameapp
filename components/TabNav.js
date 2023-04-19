@@ -57,7 +57,7 @@ export default function TabNav() {
       <Tab.Screen
         name="home"
         component={Home}
-        options={{ headerShown: false, tabBarStyle: { display: 'none' } }}
+        options={{ headerShown: false }}
       />
       <Tab.Screen
         name="games"

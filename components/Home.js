@@ -50,41 +50,41 @@ export default function Home({ navigation }) {
         </View>
         <Ionicons name="chevron-down-outline" size={40} style={styles.icon} />
 
-        <View style={[styles.linkImgContainer, { marginTop: 90 }]}>
-          <Image source={link1} style={styles.linkImg} />
-          <TouchableOpacity onPress={() => navigation.navigate('search')}>
+        <TouchableOpacity onPress={() => navigation.navigate('search')}>
+          <View style={[styles.linkImgContainer, { marginTop: 90 }]}>
+            <Image source={link1} style={styles.linkImg} />
             <View style={styles.button}>
               <Text style={styles.buttonText}>Search for games</Text>
             </View>
-          </TouchableOpacity>
-        </View>
+          </View>
+        </TouchableOpacity>
 
-        <View style={styles.linkImgContainer}>
-          <Image source={link2} style={styles.linkImg} />
-          <TouchableOpacity onPress={() => navigation.navigate('games')}>
+        <TouchableOpacity onPress={() => navigation.navigate('games')}>
+          <View style={styles.linkImgContainer}>
+            <Image source={link2} style={styles.linkImg} />
             <View style={styles.button}>
               <Text style={styles.buttonText}>Browse boardgames</Text>
             </View>
-          </TouchableOpacity>
-        </View>
+          </View>
+        </TouchableOpacity>
 
-        <View style={styles.linkImgContainer}>
-          <Image source={link3} style={styles.linkImg} />
-          <TouchableOpacity onPress={() => navigation.navigate('categories')}>
+        <TouchableOpacity onPress={() => navigation.navigate('categories')}>
+          <View style={styles.linkImgContainer}>
+            <Image source={link3} style={styles.linkImg} />
             <View style={styles.button}>
               <Text style={styles.buttonText}>Browse by category</Text>
             </View>
-          </TouchableOpacity>
-        </View>
+          </View>
+        </TouchableOpacity>
 
-        <View style={styles.linkImgContainer}>
-          <Image source={link4} style={styles.linkImg} />
-          <TouchableOpacity onPress={() => navigation.navigate('favourites')}>
+        <TouchableOpacity onPress={() => navigation.navigate('favourites')}>
+          <View style={styles.linkImgContainer}>
+            <Image source={link4} style={styles.linkImg} />
             <View style={styles.button}>
               <Text style={styles.buttonText}>Favourites</Text>
             </View>
-          </TouchableOpacity>
-        </View>
+          </View>
+        </TouchableOpacity>
       </ScrollView>
     </SafeAreaView>
   );

@@ -81,27 +81,43 @@ export default function Game({ route, navigation }) {
           data={game}
           renderItem={({ item }) => (
             <>
-              <View style={styles.tableContainer}>
-                <TouchableOpacity
-                  onPress={() => navigation.navigate(route.params.prevScreen)}
-                >
-                  <Ionicons
-                    name={'arrow-back-outline'}
-                    size={35}
-                    style={styles.h1}
-                  />
-                </TouchableOpacity>
-                <TouchableOpacity
-                  onPress={() =>
-                    checkIfGameIsAlreadyFavourite(
-                      item.id,
-                      item.name,
-                      item.image_url
-                    )
-                  }
-                >
-                  <Ionicons name={'star-outline'} size={35} style={styles.h2} />
-                </TouchableOpacity>
+              <View
+                style={{
+                  margin: 20,
+                  flexDirection: 'row',
+                  justifyContent: 'space-between',
+                }}
+              >
+                <View style={{ alignItems: 'flex-start' }}>
+                  <TouchableOpacity
+                    onPress={() => navigation.navigate(route.params.prevScreen)}
+                  >
+                    <Ionicons
+                      name={'arrow-back-outline'}
+                      size={35}
+                      style={styles.h1}
+                    />
+                  </TouchableOpacity>
+                </View>
+
+                <View style={{ alignItems: 'flex-end' }}>
+                  <TouchableOpacity
+                    onPress={() =>
+                      checkIfGameIsAlreadyFavourite(
+                        navigation,
+                        item.id,
+                        item.name,
+                        item.image_url
+                      )
+                    }
+                  >
+                    <Ionicons
+                      name={'star-outline'}
+                      size={35}
+                      style={styles.h2}
+                    />
+                  </TouchableOpacity>
+                </View>
               </View>
 
               <View

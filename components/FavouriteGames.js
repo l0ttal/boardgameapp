@@ -15,7 +15,6 @@ import { firebaseConfig, FIREBASE_DB_URL } from './util';
 import styles from './styles';
 
 export default function FavouriteGames({ route, navigation }) {
-  // Initialize Firebase
   const firebase = initializeApp(firebaseConfig);
   const database = getDatabase(firebase, FIREBASE_DB_URL);
 

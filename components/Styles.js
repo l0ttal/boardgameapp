@@ -57,7 +57,6 @@ export default StyleSheet.create({
     fontWeight: '500',
     fontFamily: 'CrimsonText_700Bold',
     color: '#2c2921',
-    letterSpacing: 2,
   },
   h3: {
     fontSize: 32,
@@ -74,8 +73,8 @@ export default StyleSheet.create({
   },
   button: {
     backgroundColor: '#f4f3f0',
-    justifyContent: 'center',
     alignItems: 'center',
+    alignContent: 'center',
     width: '60%',
     borderWidth: 1,
     borderRadius: 10,
