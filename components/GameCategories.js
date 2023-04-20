@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import {
   View,
   Text,
@@ -18,6 +18,8 @@ export default function GameCategories({ route, navigation }) {
   const [categoryData, setCategoryData] = useState(null);
   const [gameData, setGameData] = useState(null);
   const [selectedCategoryId, setSelectedCategoryId] = useState(null);
+  const [selectedIndex, setSelectedIndex] = useState(-1);
+  const flatlistRef = useRef(null);
 
   useEffect(() => {
     setIsLoading(true);
@@ -43,9 +45,20 @@ export default function GameCategories({ route, navigation }) {
     }
   };
 
-  const handleCategoryPress = (categoryId) => {
+  const handleCategoryPress = (categoryId, index) => {
     setSelectedCategoryId(categoryId);
     fetchGames(categoryId);
+    setSelectedIndex(index);
+  };
+
+  // Scroll to selected category
+  const handleOnLayout = () => {
+    setTimeout(() => {
+      flatlistRef.current?.scrollToIndex({
+        index: selectedIndex,
+        animated: true,
+      });
+    }, 0);
   };
 
   if (isLoading) {
@@ -63,11 +76,24 @@ export default function GameCategories({ route, navigation }) {
       <View style={styles.textContainer}>
         {categoryData && (
           <FlatList
+            ref={flatlistRef}
             data={categoryData}
-            renderItem={({ item }) => (
+            onLayout={handleOnLayout}
+            onScrollToIndexFailed={(info) => {
+              const wait = new Promise((resolve) => setTimeout(resolve, 500));
+              wait.then(() => {
+                flatlistRef.current?.scrollToIndex({
+                  index: info.index,
+                  animated: true,
+                });
+              });
+            }}
+            renderItem={({ item, index }) => (
               <>
                 <View style={styles.listContainer}>
-                  <Pressable onPress={() => handleCategoryPress(item.id)}>
+                  <Pressable
+                    onPress={() => handleCategoryPress(item.id, index)}
+                  >
                     <Text style={styles.h3}>
                       {item.name}{' '}
                       <Ionicons name="chevron-down-outline" size={30} />
@@ -78,7 +104,7 @@ export default function GameCategories({ route, navigation }) {
                 {gameData && selectedCategoryId === item.id && (
                   <FlatList
                     data={gameData}
-                    renderItem={({ item }) => (
+                    renderItem={({ item, index }) => (
                       <>
                         <View style={styles.listContainer}>
                           <TouchableOpacity
