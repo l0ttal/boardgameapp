@@ -1,7 +1,7 @@
 {
   "expo": {
     "name": "boardgameapp",
-    "slug": "boardgameapp",
+    "slug": "boardgame-app",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -11,7 +11,9 @@
       "resizeMode": "contain",
       "backgroundColor": "#d3cfc5"
     },
-    "assetBundlePatterns": ["**/*"],
+    "assetBundlePatterns": [
+      "**/*"
+    ],
     "ios": {
       "supportsTablet": true
     },
@@ -23,6 +25,12 @@
     },
     "web": {
       "favicon": "./assets/favicon.png"
-    }
+    },
+    "extra": {
+      "eas": {
+        "projectId": "e5baf008-bbc9-4008-8229-f681c3d42154"
+      }
+    },
+    "owner": "l0ttal"
   }
 }
