@@ -9,7 +9,6 @@ npm-debug.*
 *.mobileprovision
 *.orig.*
 web-build/
-/components/util.js
 
 # macOS
 .DS_Store
