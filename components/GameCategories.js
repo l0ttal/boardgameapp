@@ -18,7 +18,7 @@ export default function GameCategories({ route, navigation }) {
   const [categoryData, setCategoryData] = useState(null);
   const [gameData, setGameData] = useState(null);
   const [selectedCategoryId, setSelectedCategoryId] = useState(null);
-  const [selectedIndex, setSelectedIndex] = useState(-1);
+  const [selectedIndex, setSelectedIndex] = useState(0);
   const flatlistRef = useRef(null);
 
   useEffect(() => {
