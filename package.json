@@ -12,6 +12,8 @@
     "@expo-google-fonts/crimson-text": "^0.2.3",
     "@expo-google-fonts/josefin-sans": "^0.2.3",
     "@expo-google-fonts/raleway": "^0.2.3",
+    "@expo/config-plugins": "^6.0.1",
+    "@expo/prebuild-config": "^6.0.0",
     "@react-navigation/bottom-tabs": "^6.5.7",
     "@react-navigation/stack": "^6.3.16",
     "expo": "~48.0.6",
