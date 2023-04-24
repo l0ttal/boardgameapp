@@ -2,7 +2,7 @@
 
 Haaga-Helia / Mobiiliohjelmointi - SWD4TN021-3021 Final project
 
-Boardgame API: https://www.boardgameatlas.com/api/docs/
+Boardgame API: [Boardgame Atlas](https://www.boardgameatlas.com/api/docs/)
 
 ## Usage
 
@@ -15,7 +15,7 @@ Run
 npm install
 ```
 
-and start the development server (in a non-Git Bash CLI):
+and start the development server:
 
 ```
 npx expo start
@@ -33,3 +33,5 @@ Scan the QR code from your CLI on your Expo Go app.
   - Text: Josefin Sans
 
 - Google Firebase (for saving favourite games)
+
+- Code formatted with [Prettier Code Formatter](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode)
