@@ -1,3 +1,4 @@
+import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { NavigationContainer } from '@react-navigation/native';
 import { useFonts, CrimsonText_700Bold } from '@expo-google-fonts/crimson-text';
 import {
@@ -24,8 +25,10 @@ export default function App() {
   }
 
   return (
-    <NavigationContainer>
-      <TabNav />
-    </NavigationContainer>
+    <SafeAreaProvider>
+      <NavigationContainer>
+        <TabNav />
+      </NavigationContainer>
+    </SafeAreaProvider>
   );
 }
