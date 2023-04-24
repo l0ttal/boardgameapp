@@ -7,11 +7,6 @@
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "automatic",
     "platforms": ["ios", "android", "web"],
-    "splash": {
-      "image": "./assets/splash.png",
-      "resizeMode": "contain",
-      "backgroundColor": "#d3cfc5"
-    },
     "assetBundlePatterns": ["**/*"],
     "android": {
       "package": "com.l0ttal.boardgameapp"
