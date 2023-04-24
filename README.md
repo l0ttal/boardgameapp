@@ -32,6 +32,6 @@ Scan the QR code from your CLI on your Expo Go app.
   - Headers: Crimson Text
   - Text: Josefin Sans
 
-- Google Firebase (for saving favourite games)
+- Google Firebase database (for saving favourite games)
 
 - Code formatted with [Prettier Code Formatter](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode)
