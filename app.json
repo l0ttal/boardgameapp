@@ -6,7 +6,9 @@
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "automatic",
-    "platforms": ["ios", "android", "web"],
+    "splash": {
+      "backgroundColor": "#d3cfc5"
+    },
     "assetBundlePatterns": ["**/*"],
     "android": {
       "package": "com.l0ttal.boardgameapp"
