@@ -20,8 +20,8 @@ export default function TabNav() {
   return (
     <Tab.Navigator
       screenOptions={({ route }) => ({
-        headerStatusBarHeight: 80,
-        headerTitleStyle: [styles.h2, { paddingBottom: 80, color: '#f4f3f0' }],
+        headerStatusBarHeight: 100,
+        headerTitleStyle: [styles.h2, { paddingBottom: 70, color: '#f4f3f0' }],
         headerTitleAlign: 'left',
         tabBarIcon: ({ focused, color }) => {
           let iconName;
