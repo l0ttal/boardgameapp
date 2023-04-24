@@ -7,7 +7,7 @@ Boardgame API: https://www.boardgameatlas.com/api/docs/
 ## Usage
 
 If you’re on macOS or Linux, make sure you have
-[Watchman installed](https://facebook.github.io/watchman/docs/install).
+[Watchman](https://facebook.github.io/watchman/docs/install) installed.
 
 Run 
 
