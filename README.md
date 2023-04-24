@@ -26,7 +26,7 @@ Scan the QR code from your CLI on your Expo Go app.
 ## Features
 
 - List, search and inspect boardgames
-- Browse games by category.
+- Browse games by category
 
 - Custom Google Fonts
   - Headers: Crimson Text
