@@ -49,6 +49,7 @@ export default function Game({ route, navigation }) {
         console.error(`Error fetching categories: ${error}`);
       }
     };
+
     fetchCategoriesData();
   }, []);
 
@@ -61,6 +62,7 @@ export default function Game({ route, navigation }) {
         console.error(`Error fetching mechanics: ${error}`);
       }
     };
+
     fetchMechanicsData();
   }, []);
 

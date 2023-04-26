@@ -5,7 +5,7 @@ import { FlatList } from 'react-native-gesture-handler';
 import { GAME_API_URL } from './util';
 import styles from './styles';
 
-export default function GameList({ route, navigation }) {
+export default function GameList({ navigation }) {
   const [isLoading, setIsLoading] = useState(false);
   const [gameList, setGameList] = useState(null);
 

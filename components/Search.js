@@ -10,11 +10,11 @@ import {
 } from 'react-native';
 import { FlatList } from 'react-native-gesture-handler';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import { GAME_API_URL } from './util';
 
+import { GAME_API_URL } from './util';
 import styles from './styles';
 
-export default function Search({ route, navigation }) {
+export default function Search({ navigation }) {
   const [isLoading, setIsLoading] = useState(false);
   const [gameData, setGameData] = useState(null);
   const [searchTerm, setSearchTerm] = useState(null);

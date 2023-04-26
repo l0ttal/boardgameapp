@@ -14,7 +14,7 @@ import { getDatabase, ref, onValue } from 'firebase/database';
 import { firebaseConfig, FIREBASE_DB_URL } from './util';
 import styles from './styles';
 
-export default function FavouriteGames({ route, navigation }) {
+export default function FavouriteGames({ navigation }) {
   const firebase = initializeApp(firebaseConfig);
   const database = getDatabase(firebase, FIREBASE_DB_URL);
 
@@ -24,6 +24,7 @@ export default function FavouriteGames({ route, navigation }) {
   useEffect(() => {
     setIsLoading(true);
     const gamesRef = ref(database, 'boardgames/');
+
     onValue(gamesRef, (snapshot) => {
       const data = snapshot.val();
 

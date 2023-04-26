@@ -13,7 +13,7 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 import { GAME_API_URL, fetchCategories } from './util';
 import styles from './styles';
 
-export default function GameCategories({ route, navigation }) {
+export default function GameCategories({ navigation }) {
   const [isLoading, setIsLoading] = useState(false);
   const [categoryData, setCategoryData] = useState(null);
   const [gameData, setGameData] = useState(null);
@@ -23,10 +23,12 @@ export default function GameCategories({ route, navigation }) {
 
   useEffect(() => {
     setIsLoading(true);
+
     const fetchData = async () => {
       const categories = await fetchCategories();
       setCategoryData(categories);
     };
+
     setIsLoading(false);
     fetchData();
   }, []);
