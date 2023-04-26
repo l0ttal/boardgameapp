@@ -5,9 +5,11 @@ import {
   JosefinSans_400Regular,
   JosefinSans_700Bold,
 } from '@expo-google-fonts/josefin-sans';
-import * as SplashScreen from 'expo-splash-screen';
-
 import TabNav from './components/TabNav';
+import * as SplashScreen from 'expo-splash-screen';
+import { enableScreens } from 'react-native-screens';
+
+enableScreens();
 
 SplashScreen.preventAutoHideAsync();
 
